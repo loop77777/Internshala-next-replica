@@ -69,7 +69,7 @@ npm run start
 
 ## Submission Links
 
-- GitHub Repository: `<add-your-github-link>`
+- GitHub Repository: `<[Internshala-next-replica](https://github.com/loop77777/Internshala-next-replica)>`
 - Hosted App: `<add-your-deployment-link>`
 
 ## Author
