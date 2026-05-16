@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  color: #1f2937;
+  font-style: normal;
+  font-optical-sizing: auto;
+  background: linear-gradient(180deg, #f6f9fc 0%, #f2f6fb 100%);
+  letter-spacing: 0.1px;
+  font-size: 16px;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+.topbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  width: 100%;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+.brand-logo {
+  width: 178px;
+  height: 68px;
+  object-fit: contain;
+}
+
+.global-search {
+  flex: 1;
+  width: 100%;
+  margin-left: 64px;
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+}
+
+.hero {
+  text-align: center;
+  margin: 26px 0 18px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 0.5px;
+}
+
+.hero p {
+  margin: 8px 0 0;
+  font-size: 17px;
+  color: #64748b;
+}
+
+.content {
+  width: min(1180px, 96%);
+  margin: 0 auto 40px;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 18px;
+}
+
+.filters,
+.card,
+.results-head {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(2, 12, 27, 0.05);
+}
+
+.filters {
+  padding: 16px;
+  height: fit-content;
+}
+
+.filters-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.filters-head h2 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 0.4px;
+}
+
+.filters label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 12px 0;
+  letter-spacing: 0.2px;
+}
+
+.filters input,
+.filters select {
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 9px 10px;
+  font-size: 14px;
+}
+
+.filters input[type="range"] {
+  padding: 0;
+}
+
+.checkbox-row {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500 !important;
+}
+
+.checkbox-row input {
+  width: auto;
+  margin: 0;
+  accent-color: #0b6fc2;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.results-head {
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.results-head p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.25px;
+}
+
+.results-head select {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 15px;
+}
+
+.card {
+  padding: 14px;
+}
+
+.chip-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  background: #edf5ff;
+  color: #185998;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.card h3 {
+  margin: 12px 0 6px;
+  font-size: 22px;
+  letter-spacing: 0.3px;
+}
+
+.company {
+  margin: 0;
+  font-size: 16px;
+  color: #6b7280;
+  letter-spacing: 0.2px;
+}
+
+.meta {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  color: #334155;
+  font-size: 16px;
+}
+
+.footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.clear-btn {
+  margin-top: 14px;
+  width: 100%;
+  border: 1px solid #0b6fc2;
+  background: #0b6fc2;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.35px;
+  cursor: pointer;
+  box-shadow: 0 10px 18px rgba(11, 111, 194, 0.2);
+  transition: all 0.2s ease;
+}
+
+.clear-btn:hover {
+  background: #095ea7;
+  border-color: #095ea7;
+}
+
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .global-search {
+    width: 100%;
+  }
+}
