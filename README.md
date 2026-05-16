@@ -70,7 +70,7 @@ npm run start
 ## Submission Links
 
 - GitHub Repository: `<[Internshala-next-replica](https://github.com/loop77777/Internshala-next-replica)>`
-- Hosted App: `<add-your-deployment-link>`
+- Hosted App: `<[Internshala Next.js Replica](https://internshala-next-deepreplica.netlify.app/internships)>`
 
 ## Author
 
