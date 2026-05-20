@@ -4,6 +4,7 @@ export default function InternshipCard({ item }) {
       <h3>{item.title}</h3>
       <p className="company">{item.company}</p>
 
+      {/* Keep primary internship details grouped for quick scanning. */}
       <div className="meta">
         <span>{item.location}</span>
         <span>{item.duration ? `${item.duration} months` : "Duration not specified"}</span>
@@ -16,4 +17,3 @@ export default function InternshipCard({ item }) {
     </article>
   );
 }
-

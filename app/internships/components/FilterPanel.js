@@ -1,4 +1,9 @@
 export default function FilterPanel({ filters, setFilters, onClear }) {
+  // Small helper to keep controlled input updates consistent across fields.
+  const updateFilter = (key, value) => {
+    setFilters((prev) => ({ ...prev, [key]: value }));
+  };
+
   return (
     <aside className="filters">
       <div className="filters-head">
@@ -9,7 +14,7 @@ export default function FilterPanel({ filters, setFilters, onClear }) {
         Profile
         <input
           value={filters.profile}
-          onChange={(e) => setFilters((prev) => ({ ...prev, profile: e.target.value }))}
+          onChange={(e) => updateFilter("profile", e.target.value)}
           placeholder="e.g. Marketing"
         />
       </label>
@@ -18,7 +23,7 @@ export default function FilterPanel({ filters, setFilters, onClear }) {
         Location
         <input
           value={filters.city}
-          onChange={(e) => setFilters((prev) => ({ ...prev, city: e.target.value }))}
+          onChange={(e) => updateFilter("city", e.target.value)}
           placeholder="e.g. Delhi"
         />
       </label>
@@ -27,7 +32,7 @@ export default function FilterPanel({ filters, setFilters, onClear }) {
         <input
           type="checkbox"
           checked={filters.workFromHome}
-          onChange={(e) => setFilters((prev) => ({ ...prev, workFromHome: e.target.checked }))}
+          onChange={(e) => updateFilter("workFromHome", e.target.checked)}
         />
         Work from home
       </label>
@@ -36,7 +41,7 @@ export default function FilterPanel({ filters, setFilters, onClear }) {
         <input
           type="checkbox"
           checked={filters.partTime}
-          onChange={(e) => setFilters((prev) => ({ ...prev, partTime: e.target.checked }))}
+          onChange={(e) => updateFilter("partTime", e.target.checked)}
         />
         Part-time
       </label>
@@ -49,7 +54,7 @@ export default function FilterPanel({ filters, setFilters, onClear }) {
           max="10000"
           step="2000"
           value={filters.minStipend}
-          onChange={(e) => setFilters((prev) => ({ ...prev, minStipend: Number(e.target.value) }))}
+          onChange={(e) => updateFilter("minStipend", Number(e.target.value))}
         />
       </label>
 
@@ -60,7 +65,7 @@ export default function FilterPanel({ filters, setFilters, onClear }) {
           min="1"
           max="12"
           value={filters.maxDuration}
-          onChange={(e) => setFilters((prev) => ({ ...prev, maxDuration: Number(e.target.value) }))}
+          onChange={(e) => updateFilter("maxDuration", Number(e.target.value))}
         />
       </label>
 
@@ -68,7 +73,7 @@ export default function FilterPanel({ filters, setFilters, onClear }) {
         Keyword search
         <input
           value={filters.keyword}
-          onChange={(e) => setFilters((prev) => ({ ...prev, keyword: e.target.value }))}
+          onChange={(e) => updateFilter("keyword", e.target.value)}
           placeholder="e.g. React, SEO, Finance"
         />
       </label>

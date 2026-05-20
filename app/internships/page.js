@@ -5,6 +5,7 @@ import FilterPanel from "./components/FilterPanel";
 import InternshipCard from "./components/InternshipCard";
 import SearchHeader from "./components/SearchHeader";
 
+// Centralized default state keeps reset behavior predictable.
 const initialFilters = {
   topQuery: "",
   keyword: "",
@@ -17,11 +18,13 @@ const initialFilters = {
   sort: "relevance",
 };
 
+// Duration comes as strings like "3 Months". We only need the numeric month value.
 function parseDurationToMonths(durationText = "") {
   const match = String(durationText).match(/\d+/);
   return match ? Number(match[0]) : 0;
 }
 
+// Fallback parser in case salaryValue1 is missing in API data.
 function parseStipendToNumber(stipend = {}) {
   const text = stipend?.salary || stipend?.salaryValue1 || "";
   const cleaned = String(text).replace(/,/g, "");
@@ -29,6 +32,7 @@ function parseStipendToNumber(stipend = {}) {
   return match ? Number(match[0]) : 0;
 }
 
+// Normalize raw API records so UI and filter logic can work on a stable shape.
 function normalizeInternship(item = {}) {
   const locations = Array.isArray(item.location_names)
     ? item.location_names.join(", ")
@@ -63,20 +67,26 @@ export default function InternshipsPage() {
       try {
         setLoading(true);
         setError("");
+
+        // Fetch a few pages in parallel and merge unique internships.
         const pageRequests = Array.from({ length: 5 }, (_, index) =>
           fetch(`https://internshala.com/hiring/search?page_no=${index + 1}`)
         );
+
         const responses = await Promise.all(pageRequests);
         responses.forEach((response) => {
           if (!response.ok) {
             throw new Error(`Failed request: ${response.status}`);
           }
         });
+
         const pages = await Promise.all(responses.map((response) => response.json()));
         const merged = pages.flatMap((page) => Object.values(page?.internships_meta || {}));
+
         const uniqueById = Array.from(
           new Map(merged.map((item) => [item.id || `${item.title}-${item.company_name}`, item])).values()
         );
+
         setInternships(uniqueById.map((item) => normalizeInternship(item)));
       } catch (e) {
         setError("Could not fetch internships. Please try again.");
@@ -91,23 +101,27 @@ export default function InternshipsPage() {
   const filteredInternships = useMemo(() => {
     const normalizedTopQuery = filters.topQuery.trim().toLowerCase();
     const normalizedKeyword = filters.keyword.trim().toLowerCase();
+    const normalizedProfile = filters.profile.toLowerCase();
+    const normalizedCity = filters.city.toLowerCase();
 
     const result = internships.filter((item) => {
-      const profileMatch =
-        !filters.profile || item.profileName.toLowerCase().includes(filters.profile.toLowerCase());
-      const cityMatch = !filters.city || item.location.toLowerCase().includes(filters.city.toLowerCase());
+      const profileMatch = !normalizedProfile || item.profileName.toLowerCase().includes(normalizedProfile);
+      const cityMatch = !normalizedCity || item.location.toLowerCase().includes(normalizedCity);
+
       const topQueryMatch =
         !normalizedTopQuery ||
         item.title.toLowerCase().includes(normalizedTopQuery) ||
         item.company.toLowerCase().includes(normalizedTopQuery) ||
         item.profileName.toLowerCase().includes(normalizedTopQuery) ||
         item.location.toLowerCase().includes(normalizedTopQuery);
+
       const keywordMatch =
         !normalizedKeyword ||
         item.title.toLowerCase().includes(normalizedKeyword) ||
         item.company.toLowerCase().includes(normalizedKeyword) ||
         item.profileName.toLowerCase().includes(normalizedKeyword) ||
         item.location.toLowerCase().includes(normalizedKeyword);
+
       const workFromHomeMatch = !filters.workFromHome || item.workFromHome;
       const partTimeMatch = !filters.partTime || item.partTime;
       const durationMatch = item.duration <= filters.maxDuration || item.duration === 0;
